@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { PessoasService } from 'src/app/services/Pessoas/pessoas.service';
 import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,17 +25,21 @@ export class HomeComponent implements OnInit {
   teste: Pessoa[];
   constructor(
     private pessoasService: PessoasService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.pessoas = this.pessoasService.getPessoas();
-    this.authService.teste();
-    this.pessoasService.getPessoas().subscribe(dados => {
-      this.teste = dados;
-      console.log(this.teste);
-    });
   }
 
   ngOnInit() {
+    if(!this.authService.getSessao()) {
+      console.log('Por favor, efetue login antes!');
+      this.router.navigate(['']);
+    }
+    else {
+      console.log('Sessão iniciada');
+      console.log(this.authService.getSessao());
+    }
   }
 
 }

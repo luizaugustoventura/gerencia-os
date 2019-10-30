@@ -8,10 +8,12 @@
 */
 
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/firestore';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Login } from 'src/app/models/Login/login';
+
 
 
 @Injectable({
@@ -21,7 +23,7 @@ export class AuthenticationService {
 
   private pessoas: Observable<Pessoa[]>;
   private pessoasCollection: AngularFirestoreCollection<Pessoa>;
-
+  private login: Login;
 
   constructor(private afs: AngularFirestore) {
     this.pessoasCollection = this.afs.collection<Pessoa>('pessoas');
@@ -39,38 +41,20 @@ export class AuthenticationService {
     );
   }
 
-  async teste() {
+  logIn(email: string, senha: string): Promise<any> {
 
-    let pessoa: Pessoa;
-    let email = 'luiz@gmail.com';
-    let senha = '123456';
+    console.log(email, senha);
 
-    await this.pessoasCollection.ref.where('email', '==', email).
+    return this.pessoasCollection.ref.where('email', '==', email).
     where('senha', '==', senha).limit(1)
-    .get()
-    .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-            // doc.data() is never undefined for query doc snapshots
+    .get();
+  }
 
-            console.log(doc.data());
-            pessoa = {
-              id: doc.id,
-              nome: doc.data().nome,
-              email: doc.data().email,
-              senha: doc.data().senha,
-              departamento: doc.data().departamento,
-              telefone: doc.data().telefone,
-              admin: doc.data().admin
-            };
-        });
-    })
-    .catch(error => {
-        console.log("Error getting documents: ", error);
-    });
+  setSessao(login: Login) {
+    this.login = login;
+  }
 
-    if(pessoa)
-      console.log("Cê é o bixão memo!");
-    else
-      console.log("Tem algo errado aí meu bacano");
+  getSessao(): Login {
+    return this.login;
   }
 }

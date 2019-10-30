@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +23,7 @@ import { HomeComponent } from './pages/home/home.component';
     AppRoutingModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    //AngularFireDatabase,
-    //AngularFireModule
+    ReactiveFormsModule
   ],
   providers: [
     AngularFirestore

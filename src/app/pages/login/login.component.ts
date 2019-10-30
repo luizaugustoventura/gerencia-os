@@ -8,6 +8,11 @@
 */
 
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
+import { Login } from 'src/app/models/Login/login';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -16,9 +21,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  formLogin: FormGroup;
+
+  constructor(
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.formLogin = this.formBuilder.group({
+      email: new FormControl('', Validators.required),
+      senha: new FormControl('', Validators.required)
+    });
+  }
+
+  login(usuario: any) {
+    this.authService.logIn(usuario.email, usuario.senha)
+    .then(querySnapshot => {
+      if(querySnapshot.size > 0) {
+        console.log('Sucesso meu guerreiro');
+        querySnapshot.forEach(doc => {
+          let login: Login = {
+            id: doc.id,
+            nome: doc.data().nome,
+            email: doc.data().email,
+            admin: doc.data().admin
+          };
+
+          this.authService.setSessao(login);
+          this.router.navigate(['/home']);
+        });
+      }
+      else {
+        console.log('Tá errado aí meu guerrero');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
 }

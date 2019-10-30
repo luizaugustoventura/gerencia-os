@@ -1,4 +1,8 @@
-<div *ngFor="let pessoa of teste">
+<div *ngFor="let pessoa of (pessoas | async)">
   <p>Nome: {{pessoa.nome}}</p>
   <p>Email: {{pessoa.email}}</p>
+</div>
+
+<div>
+  <button [routerLink]="''">Logout</button>
 </div>
