@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 *ngIf="!ordem.id" class="modal-title">Registrando Ordem de Serviço</h4>
+  <h4 *ngIf="ordem.id" class="modal-title">Alterando Ordem de Serviço</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form #formProduto=ngForm novalidate>
+    <label>Departamento origem</label>
+    <input type="text" [(ngModel)]="ordem.dep_Origem" name="dep_Origem"
+      class="form-control" required>
+
+    <label>Departamento destino</label>
+    <input type="text" [(ngModel)]="ordem.dep_Destino" name="dep_Destino"
+      class="form-control" required>
+
+    <label>Serviço</label>
+    <input type="textarea" [(ngModel)]="ordem.servico" name="servico"
+      class="form-control" required>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button *ngIf="ordem.id" type="button" class="btn btn-info"
+  (click)="alterar(ordem)" [disabled]="!formProduto.valid">Salvar</button>
+
+  <button *ngIf="!ordem.id" type="button" class="btn btn-info"
+  (click)="registrar(formProduto.value)" [disabled]="!formProduto.valid">Registrar</button>
+</div>

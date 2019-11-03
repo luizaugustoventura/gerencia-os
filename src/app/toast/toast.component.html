@@ -1,0 +1,14 @@
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  header="Aviso"
+  [delay]="5000"
+  [autohide]="autohide"
+  (mouseenter)="autohide = false"
+  (mouseleave)="autohide = true"
+  (hide)="autohide = true; toastService.remove(toast)"
+  [class.bg-danger]="!toast.success"
+  [class.bg-info]="toast.success"
+  [class.text-white]="true"
+>
+  {{toast.message}}
+</ngb-toast>

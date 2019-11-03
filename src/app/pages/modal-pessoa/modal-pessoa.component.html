@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 *ngIf="!pessoa.id" class="modal-title">Registrando Usuário</h4>
+  <h4 *ngIf="pessoa.id" class="modal-title">Editando Usuário</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form #formPessoa=ngForm novalidate>
+    <label>Nome</label>
+    <input type="text" [(ngModel)]="pessoa.nome" name="nome" class="form-control" required>
+
+    <label>Email</label>
+    <input type="text" [(ngModel)]="pessoa.email" name="email" class="form-control" required>
+
+    <label>Senha</label>
+    <input type="secret" [(ngModel)]="pessoa.senha" name="senha" class="form-control" required>
+
+    <label *ngIf="!pessoa.id">Departamento</label>
+    <input *ngIf="!pessoa.id" type="text" [(ngModel)]="pessoa.departamento" name="departamento"
+      class="form-control" required>
+
+    <label>Telefone</label>
+    <input type="number" [(ngModel)]="pessoa.telefone" name="telefone"
+      class="form-control" required>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button *ngIf="pessoa.id" type="button" class="btn btn-info" (click)="alterar(pessoa)"
+    [disabled]="!formPessoa.valid">
+      Salvar
+  </button>
+
+  <button *ngIf="!pessoa.id" type="button" class="btn btn-info" (click)="registrar(formPessoa.value)"
+    [disabled]="!formPessoa.valid">
+      Registrar
+  </button>
+</div>

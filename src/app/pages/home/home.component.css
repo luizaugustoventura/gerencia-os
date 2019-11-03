@@ -1,0 +1,33 @@
+/* ****************** Estilização dos TAB PILLs ****************/
+
+::ng-deep a {
+  color: #17a3b8;
+}
+
+::ng-deep a:hover {
+  color: #138496;
+}
+
+::ng-deep .nav-fill .nav-link.active {
+  margin-top: -1px;
+  border-top: 2px solid #17a3b8;
+}
+
+::ng-deep .nav-pills .nav-link.active,
+::ng-deep .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #17a3b8;
+}
+
+/********** Botão flutuante *************/
+.floating-button {
+  right: 15px;
+  bottom: 15px;
+  position: fixed;
+  z-index: 1;
+}
+
+/*********** Ponteiro do Mouse **********/
+.mouse-pointer {
+  cursor: pointer;
+}

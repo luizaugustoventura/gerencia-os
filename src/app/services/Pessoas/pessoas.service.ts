@@ -8,7 +8,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { map, take } from 'rxjs/operators';
@@ -18,8 +18,8 @@ import { map, take } from 'rxjs/operators';
 })
 export class PessoasService {
 
-  pessoas: Observable<Pessoa[]>;
-  pessoasCollection: AngularFirestoreCollection<Pessoa>;
+  private pessoas: Observable<Pessoa[]>;
+  private pessoasCollection: AngularFirestoreCollection<Pessoa>;
 
   constructor(private afs: AngularFirestore) {
     this.pessoasCollection = this.afs.collection<Pessoa>('pessoas');
@@ -38,5 +38,34 @@ export class PessoasService {
 
   getPessoas(): Observable<Pessoa[]> {
     return this.pessoas;
+  }
+
+  getPessoa(id: string): Observable<Pessoa> {
+    return this.pessoasCollection.doc<Pessoa>(id).valueChanges()
+    .pipe(
+      take(1),
+      map(pessoa => {
+        pessoa.id = id;
+        return pessoa;
+      })
+    );
+  }
+
+  create(pessoa: Pessoa): Promise<DocumentReference> {
+    return this.pessoasCollection.add(pessoa);
+  }
+
+  update(pessoa: Pessoa): Promise<void> {
+    return this.pessoasCollection.doc(pessoa.id)
+    .update({
+      nome: pessoa.nome,
+      email: pessoa.email,
+      telefone: pessoa.telefone,
+      senha: pessoa.senha,
+    });
+  }
+
+  delete(id: string): Promise<void> {
+    return this.pessoasCollection.doc(id).delete();
   }
 }

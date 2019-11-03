@@ -1,15 +1,14 @@
 <form [formGroup]="formLogin" (ngSubmit)="login(formLogin.value)">
   <label for="inputEmail">Email: </label>
-  <input type="email" id="inputEmail" required autofocus
-    name="usuario" formControlName="email">
+  <input type="email" id="inputEmail" required autofocus name="usuario" formControlName="email"
+    class="form-control">
 
   <br>
 
   <label for="inputSenha">Senha</label>
-  <input type="password" id="inputSenha"
-    name="senha" formControlName="senha">
+  <input type="password" id="inputSenha" name="senha" formControlName="senha" class="form-control">
 
 
   <br>
-  <button type="submit" [disabled]="!formLogin.valid">Entrar</button>
+  <button type="submit" class="btn btn-info" [disabled]="!formLogin.valid">Entrar</button>
 </form>

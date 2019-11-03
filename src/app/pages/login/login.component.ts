@@ -12,6 +12,7 @@ import { AuthenticationService } from 'src/app/services/Authentication/authentic
 import { Login } from 'src/app/models/Login/login';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/services/ToastController/toast.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder,
     private router: Router
   ) { }
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         console.log('Tá errado aí meu guerrero');
+        this.toastService.show(false, 'Dados de login inválidos');
       }
     })
     .catch(error => {
