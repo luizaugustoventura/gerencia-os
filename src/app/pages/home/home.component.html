@@ -22,7 +22,7 @@
                   <h5 *ngIf="login.admin" ngbDropdownItem class="text-info"> admin: {{login.nome.split(' ')[0]}}</h5>
                   <h5 *ngIf="!login.admin" ngbDropDownItem class="text-info"> Usuário: {{login.nome.split(' ')[0]}}</h5>
 
-                  <button ngbDropdownItem>Minha conta</button>
+                  <button ngbDropdownItem (click)="modalPessoa(login.id)">Minha conta</button>
                   <button ngbDropdownItem (click)="logout()">Logout</button>
                 </div>
               </div>
@@ -58,12 +58,12 @@
             <span><b>{{ordem.usuario.nome}}</b></span>
 
             <span class="float-right">
-              <a class="text-info mouse-pointer"
+              <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, '')"
               ngbTooltip="Editar OS">
                 <i class="material-icons">edit</i>
               </a>
 
-              <a class="text-danger mouse-pointer"
+              <a class="text-danger mouse-pointer" (click)="modalExcluir('ordem de serviço', ordem.id)"
               ngbTooltip="Excluir OS">
                 <i class="material-icons">close</i>
               </a>
@@ -71,7 +71,7 @@
 
           </div>
           <div class="card-body">
-            <p><b>Data: </b>{{ordem.data}}</p>
+            <p><b>Data: </b>{{ordem.data.seconds * 1000 | date: 'dd/MM/yyyy'}}</p>
             <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
             <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
             <p><b>Serviço: </b>{{ordem.servico}}</p>
@@ -123,12 +123,12 @@
                   <span>{{ordem.usuario.nome}}</span>
 
                   <span class="float-right">
-                    <a class="text-info mouse-pointer"
+                    <a class="text-info mouse-pointer" (click)="modalResposta(ordem.id)"
                     ngbTooltip="Marcar como atentida">
                       <i class="material-icons">check_circle_outline</i>
                     </a>
 
-                    <a class="text-success mouse-pointer"
+                    <a class="text-success mouse-pointer" (click)="modalMensagem(ordem.usuario.nome, ordem.usuario.telefone)"
                     ngbTooltip="Enviar WhatsApp">
                       <i class="material-icons">textsms</i>
                     </a>
@@ -145,7 +145,7 @@
                   <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
                   <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
                   <p><b>Serviço: </b>{{ordem.servico}}</p>
-                  <!--<p>Resposta: {{ordem.resposta}}</p>-->
+                  <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
                 </div>
               </div>
 

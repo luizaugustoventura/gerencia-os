@@ -17,6 +17,8 @@ import { ModalPessoaComponent } from './pages/modal-pessoa/modal-pessoa.componen
 import { ModalOrdemComponent } from './pages/modal-ordem/modal-ordem.component';
 import { ModalExcluirComponent } from './pages/modal-excluir/modal-excluir.component';
 import { ToastComponent } from './toast/toast.component';
+import { ModalRespostaComponent } from './pages/modal-resposta/modal-resposta.component';
+import { ModalMensagemComponent } from './pages/modal-mensagem/modal-mensagem.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ToastComponent } from './toast/toast.component';
     ModalPessoaComponent,
     ModalOrdemComponent,
     ModalExcluirComponent,
-    ToastComponent
+    ToastComponent,
+    ModalRespostaComponent,
+    ModalMensagemComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,13 @@ import { ToastComponent } from './toast/toast.component';
   providers: [
     AngularFirestore
   ],
-  entryComponents: [ModalExcluirComponent, ModalOrdemComponent, ModalPessoaComponent],
+  entryComponents: [
+    ModalExcluirComponent,
+    ModalOrdemComponent,
+    ModalPessoaComponent,
+    ModalRespostaComponent,
+    ModalMensagemComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

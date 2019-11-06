@@ -20,6 +20,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPessoaComponent } from '../modal-pessoa/modal-pessoa.component';
 import { ModalOrdemComponent } from '../modal-ordem/modal-ordem.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
+import { ModalRespostaComponent } from '../modal-resposta/modal-resposta.component';
+import { ModalMensagemComponent } from '../modal-mensagem/modal-mensagem.component';
 
 @Component({
   selector: 'app-home',
@@ -71,10 +73,21 @@ export class HomeComponent implements OnInit {
 
   }
 
-  modalOS(id: string = '', id_Usuario: string) {
+  modalOS(id: string = '', id_Usuario: string = '') {
     const modal = this.modalService.open(ModalOrdemComponent);
     modal.componentInstance.id = id;
     modal.componentInstance.id_Usuario = id_Usuario;
+  }
+
+  modalResposta(id_OS: string) {
+    const modal = this.modalService.open(ModalRespostaComponent);
+    modal.componentInstance.id = id_OS;
+  }
+
+  modalMensagem(nome: string, telefone: string) {
+    const modal = this.modalService.open(ModalMensagemComponent);
+    modal.componentInstance.nome = nome;
+    modal.componentInstance.telefone = telefone;
   }
 
   modalExcluir(seg: string, id: string) {
