@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
     this.pessoas = this.pessoasService.getPessoas();
     this.ordens = this.ordensService.getOrdens();
     this.login = this.authService.getSessao();
+
   }
 
   ngOnInit() {
@@ -84,10 +85,9 @@ export class HomeComponent implements OnInit {
     modal.componentInstance.id = id_OS;
   }
 
-  modalMensagem(nome: string, telefone: string) {
+  modalMensagem(id: string) {
     const modal = this.modalService.open(ModalMensagemComponent);
-    modal.componentInstance.nome = nome;
-    modal.componentInstance.telefone = telefone;
+    modal.componentInstance.id = id;
   }
 
   modalExcluir(seg: string, id: string) {
@@ -97,6 +97,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
+    console.log("Fazendo logout");
     this.router.navigate(['']);
   }
 }

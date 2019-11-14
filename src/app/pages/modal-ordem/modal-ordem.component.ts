@@ -56,7 +56,7 @@ export class ModalOrdemComponent implements OnInit {
 
   registrar(os: any) {
     const ordemServico: OS = {
-      usuario: this.pessoa,
+      usuarioId: this.id_Usuario,
       dep_Origem: os.dep_Origem,
       dep_Destino: os.dep_Destino,
       servico: os.servico,
@@ -76,11 +76,13 @@ export class ModalOrdemComponent implements OnInit {
 
   alterar(os: any) {
     const ordemServico: OS = {
-      usuario: this.pessoa,
+      id: this.id,
+      usuarioId: this.id_Usuario,
       dep_Origem: os.dep_Origem,
       dep_Destino: os.dep_Destino,
       servico: os.servico,
-      data: firebase.firestore.Timestamp.fromDate(new Date())
+      data: firebase.firestore.Timestamp.fromDate(new Date()),
+      resposta: os.resposta
     };
 
     this.ordensService.update(ordemServico)

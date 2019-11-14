@@ -55,10 +55,14 @@
       <div *ngFor="let ordem of (ordens | async)">
         <div class="card">
           <div class="card-header">
-            <span><b>{{ordem.usuario.nome}}</b></span>
+            <span *ngFor="let pessoa of (pessoas | async)">
+              <span *ngIf="pessoa.id == ordem.usuarioId">
+                <b>{{pessoa.nome}}</b>
+              </span>
+            </span>
 
             <span class="float-right">
-              <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, '')"
+              <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, login.id)"
               ngbTooltip="Editar OS">
                 <i class="material-icons">edit</i>
               </a>
@@ -75,7 +79,7 @@
             <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
             <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
             <p><b>Serviço: </b>{{ordem.servico}}</p>
-            <!--<p>Resposta: {{ordem.resposta}}</p>-->
+            <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
           </div>
         </div>
 
@@ -120,7 +124,11 @@
             <div *ngFor="let ordem of (ordens | async)" >
               <div class="card">
                 <div class="card-header">
-                  <span>{{ordem.usuario.nome}}</span>
+                  <span *ngFor="let pessoa of (pessoas | async)">
+                    <span *ngIf="pessoa.id == ordem.usuarioId">
+                      <b>{{pessoa.nome}}</b>
+                    </span>
+                  </span>
 
                   <span class="float-right">
                     <a class="text-info mouse-pointer" (click)="modalResposta(ordem.id)"
@@ -128,7 +136,7 @@
                       <i class="material-icons">check_circle_outline</i>
                     </a>
 
-                    <a class="text-success mouse-pointer" (click)="modalMensagem(ordem.usuario.nome, ordem.usuario.telefone)"
+                    <a class="text-success mouse-pointer" (click)="modalMensagem(ordem.usuarioId)"
                     ngbTooltip="Enviar WhatsApp">
                       <i class="material-icons">textsms</i>
                     </a>
@@ -141,7 +149,7 @@
 
                 </div>
                 <div class="card-body">
-                  <p><b>Data: </b>{{ordem.data}}</p>
+                  <p><b>Data: </b>{{ordem.data.seconds * 1000 | date:'dd/MM/yyyy'}}</p>
                   <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
                   <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
                   <p><b>Serviço: </b>{{ordem.servico}}</p>
@@ -178,7 +186,7 @@
             <div *ngFor="let pessoa of (pessoas | async)">
               <div class="card">
                 <div class="card-header">
-                  <span>{{pessoa.nome}}</span>
+                  <span><b>{{pessoa.nome}}</b></span>
 
                   <span class="float-right">
                     <a class="text-info mouse-pointer" (click)="modalPessoa(pessoa.id)"

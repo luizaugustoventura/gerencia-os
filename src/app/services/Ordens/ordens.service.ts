@@ -47,12 +47,20 @@ export class OrdensService {
   }
 
   update(ordem: OS): Promise<void> {
+    if(ordem.resposta) {
+      return this.ordensCollection.doc(ordem.id)
+      .update({
+        dep_Destino: ordem.dep_Destino,
+        servico: ordem.servico,
+        resposta: ordem.resposta,
+        data: ordem.data
+      });
+    }
     return this.ordensCollection.doc(ordem.id)
     .update({
       dep_Destino: ordem.dep_Destino,
       servico: ordem.servico,
-      resposta: ordem.resposta,
-      data: Date.now()
+      data: ordem.data
     });
   }
 

@@ -8,21 +8,24 @@
 
 <div class="modal-body">
   <form #formPessoa=ngForm novalidate>
-    <label>Nome</label>
-    <input type="text" [(ngModel)]="pessoa.nome" name="nome" class="form-control" required>
+    <label for="nome">Nome</label>
+    <input type="text" [(ngModel)]="pessoa.nome" name="nome" id="nome"
+    class="form-control" required>
 
-    <label>Email</label>
-    <input type="text" [(ngModel)]="pessoa.email" name="email" class="form-control" required>
+    <label for="email">Email</label>
+    <input type="text" [(ngModel)]="pessoa.email" name="email" id="email"
+    class="form-control" required>
 
-    <label>Senha</label>
-    <input type="secret" [(ngModel)]="pessoa.senha" name="senha" class="form-control" required>
+    <label for="senha">Senha</label>
+    <input type="secret" [(ngModel)]="pessoa.senha" name="senha" id="senha"
+    class="form-control" required>
 
-    <label *ngIf="!pessoa.id">Departamento</label>
+    <label *ngIf="!pessoa.id" for="departamento">Departamento</label>
     <input *ngIf="!pessoa.id" type="text" [(ngModel)]="pessoa.departamento" name="departamento"
-      class="form-control" required>
+    id="departamento" class="form-control" required>
 
-    <label>Telefone</label>
-    <input type="number" [(ngModel)]="pessoa.telefone" name="telefone"
+    <label for="telefone">Telefone</label>
+    <input type="number" [(ngModel)]="pessoa.telefone" name="telefone" id="telefone"
       class="form-control" required>
   </form>
 </div>

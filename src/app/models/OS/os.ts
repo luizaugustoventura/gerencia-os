@@ -1,8 +1,7 @@
-import { Pessoa } from '../Pessoa/pessoa';
 
 export class OS {
   id?: string;
-  usuario: Pessoa;
+  usuarioId: string;
   dep_Origem: string;
   dep_Destino: string;
   servico: string;
