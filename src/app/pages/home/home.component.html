@@ -61,16 +61,22 @@
               </span>
             </span>
 
-            <span class="float-right">
-              <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, login.id)"
-              ngbTooltip="Editar OS">
-                <i class="material-icons">edit</i>
-              </a>
+            <span *ngIf="!ordem.resposta">
+              <span class="float-right">
+                <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, login.id)"
+                ngbTooltip="Editar OS">
+                  <i class="material-icons">edit</i>
+                </a>
 
-              <a class="text-danger mouse-pointer" (click)="modalExcluir('ordem de serviço', ordem.id)"
-              ngbTooltip="Excluir OS">
-                <i class="material-icons">close</i>
-              </a>
+                <a class="text-danger mouse-pointer" (click)="modalExcluir('ordem de serviço', ordem.id)"
+                ngbTooltip="Excluir OS">
+                  <i class="material-icons">close</i>
+                </a>
+              </span>
+            </span>
+
+            <span *ngIf="ordem.resposta" class="float-right text-danger">
+              <b>Solicitação já foi atendida</b>
             </span>
 
           </div>
@@ -131,7 +137,7 @@
                   </span>
 
                   <span class="float-right">
-                    <a class="text-info mouse-pointer" (click)="modalResposta(ordem.id)"
+                    <a class="text-info mouse-pointer" (click)="modalResposta(ordem.id)" *ngIf="!ordem.resposta"
                     ngbTooltip="Marcar como atentida">
                       <i class="material-icons">check_circle_outline</i>
                     </a>
