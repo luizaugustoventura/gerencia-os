@@ -36,10 +36,12 @@ export class ModalRespostaComponent implements OnInit {
     .then(() => {
       console.log('Ordem de serviço atualizada');
       this.toastService.show(true, 'Atendimento realizado com sucesso');
+      this.activeModal.close('Close click');
     })
     .catch(error => {
       console.log(error);
       this.toastService.show(false, 'Erro ao realizar atendimento');
+      this.activeModal.close('Close click');
     });
   }
 

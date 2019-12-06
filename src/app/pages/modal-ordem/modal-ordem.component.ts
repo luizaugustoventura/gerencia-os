@@ -75,10 +75,12 @@ export class ModalOrdemComponent implements OnInit {
     .then(() => {
       console.log('Ordem de serviço registrada');
       this.toastService.show(true, 'Ordem de serviço registrada com sucesso');
+      this.activeModal.close('Close click');
     })
     .catch(error => {
       console.log(error);
       this.toastService.show(false, 'Erro ao registrar ordem de serviço');
+      this.activeModal.close('Close click');
     });
   }
 
@@ -97,10 +99,12 @@ export class ModalOrdemComponent implements OnInit {
     .then(() => {
       console.log('Ordem de serviço atualizada');
       this.toastService.show(true, 'Ordem de serviço alterada com sucesso');
+      this.activeModal.close('Close click');
     })
     .catch(error => {
       console.log(error);
       this.toastService.show(false, 'Erro ao alterar ordem de serviço');
+      this.activeModal.close('Close click');
     });
   }
 

@@ -52,9 +52,11 @@ export class ModalExcluirComponent implements OnInit {
               this.toastService.show(false, 'Erro ao excluir usuário');
             });
           }
+          this.activeModal.close('Close click');
         })
         .catch(err => {
           console.log(err);
+          this.activeModal.close('Close click');
         });
 
         break;
@@ -64,10 +66,12 @@ export class ModalExcluirComponent implements OnInit {
         .then(() => {
           console.log('Ordem de serviço excluída');
           this.toastService.show(true, 'Ordem de serviço excluída com sucesso');
+          this.activeModal.close('Close click');
         })
         .catch(error => {
           console.log(error);
           this.toastService.show(false, 'Erro ao excluir ordem de serviço');
+          this.activeModal.close('Close click');
         });
         break;
 

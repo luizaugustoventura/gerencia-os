@@ -62,15 +62,18 @@ export class ModalPessoaComponent implements OnInit {
     .then(() => {
       console.log('Usuário registrado');
       this.toastService.show(true, 'Usuário registrado com sucesso');
+      this.activeModal.close('Close click');
     })
     .catch((error) => {
       console.log(error);
       this.toastService.show(false, 'Erro ao registrar usuário');
+      this.activeModal.close('Close click');
     });
   }
 
   alterar(pessoa: any) {
     const usuario: Pessoa = {
+      id: this.id,
       nome: pessoa.nome,
       email: pessoa.email,
       senha: pessoa.senha,
@@ -83,10 +86,12 @@ export class ModalPessoaComponent implements OnInit {
     .then(() => {
       console.log('Usuário alterado');
       this.toastService.show(true, 'Usuário alterado com sucesso');
+      this.activeModal.close('Close click');
     })
     .catch(error => {
       console.log(error);
       this.toastService.show(false, 'Erro ao alterar usuário');
+      this.activeModal.close('Close click');
     });
   }
 }
