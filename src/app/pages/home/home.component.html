@@ -53,44 +53,47 @@
     <div>
       <!--Listagem das ordens de serviço-->
       <div *ngFor="let ordem of (ordens | async)">
-        <div class="card">
-          <div class="card-header">
-            <span *ngFor="let pessoa of (pessoas | async)">
-              <span *ngIf="pessoa.id == ordem.usuarioId">
-                <b>{{pessoa.nome}}</b>
+        <div *ngIf="ordem.usuarioId == login.id">
+
+          <div class="card">
+            <div class="card-header">
+              <span *ngFor="let pessoa of (pessoas | async)">
+                <span *ngIf="pessoa.id == ordem.usuarioId">
+                  <b>{{pessoa.nome}}</b>
+                </span>
               </span>
-            </span>
 
-            <span *ngIf="!ordem.resposta">
-              <span class="float-right">
-                <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, login.id)"
-                ngbTooltip="Editar OS">
-                  <i class="material-icons">edit</i>
-                </a>
+              <span *ngIf="!ordem.resposta">
+                <span class="float-right">
+                  <a class="text-info mouse-pointer" (click)="modalOS(ordem.id, login.id)"
+                  ngbTooltip="Editar OS">
+                    <i class="material-icons">edit</i>
+                  </a>
 
-                <a class="text-danger mouse-pointer" (click)="modalExcluir('ordem de serviço', ordem.id)"
-                ngbTooltip="Excluir OS">
-                  <i class="material-icons">close</i>
-                </a>
+                  <a class="text-danger mouse-pointer" (click)="modalExcluir('ordem de serviço', ordem.id)"
+                  ngbTooltip="Excluir OS">
+                    <i class="material-icons">close</i>
+                  </a>
+                </span>
               </span>
-            </span>
 
-            <span *ngIf="ordem.resposta" class="float-right text-danger">
-              <b>Solicitação já foi atendida</b>
-            </span>
+              <span *ngIf="ordem.resposta" class="float-right text-danger">
+                <b>Solicitação já foi atendida</b>
+              </span>
 
+            </div>
+            <div class="card-body">
+              <p><b>Data: </b>{{ordem.data.seconds * 1000 | date: 'dd/MM/yyyy'}}</p>
+              <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
+              <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
+              <p><b>Serviço: </b>{{ordem.servico}}</p>
+              <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
+            </div>
           </div>
-          <div class="card-body">
-            <p><b>Data: </b>{{ordem.data.seconds * 1000 | date: 'dd/MM/yyyy'}}</p>
-            <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
-            <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
-            <p><b>Serviço: </b>{{ordem.servico}}</p>
-            <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
-          </div>
+
+          <br>
+
         </div>
-
-        <br>
-
       </div>
 
 
@@ -190,31 +193,35 @@
 
           <div>
             <div *ngFor="let pessoa of (pessoas | async)">
-              <div class="card">
-                <div class="card-header">
-                  <span><b>{{pessoa.nome}}</b></span>
+              <div *ngIf="pessoa.id != login.id">
 
-                  <span class="float-right">
-                    <a class="text-info mouse-pointer" (click)="modalPessoa(pessoa.id)"
-                    ngbTooltip="Editar usuário">
-                      <i class="material-icons">edit</i>
-                    </a>
+                <div class="card">
+                  <div class="card-header">
+                    <span><b>{{pessoa.nome}}</b></span>
 
-                    <a class="text-danger mouse-pointer" (click)="modalExcluir('usuário', pessoa.id)"
-                    ngbTooltip="Excluir usuário">
-                        <i class="material-icons">close</i>
-                    </a>
-                  </span>
+                    <span class="float-right">
+                      <a class="text-info mouse-pointer" (click)="modalPessoa(pessoa.id)"
+                      ngbTooltip="Editar usuário">
+                        <i class="material-icons">edit</i>
+                      </a>
 
+                      <a class="text-danger mouse-pointer" (click)="modalExcluir('usuário', pessoa.id)"
+                      ngbTooltip="Excluir usuário">
+                          <i class="material-icons">close</i>
+                      </a>
+                    </span>
+
+                  </div>
+                  <div class="card-body">
+                    <p><b>Email: </b>{{pessoa.email}}</p>
+                    <p><b>Departamento: </b>{{pessoa.departamento}}</p>
+                    <p><b>Telefone: </b>{{pessoa.telefone}}</p>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <p><b>Email: </b>{{pessoa.email}}</p>
-                  <p><b>Departamento: </b>{{pessoa.departamento}}</p>
-                  <p><b>Telefone: </b>{{pessoa.telefone}}</p>
-                </div>
+
+                <br>
+
               </div>
-
-              <br>
 
             </div>
           </div>
