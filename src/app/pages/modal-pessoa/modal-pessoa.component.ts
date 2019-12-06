@@ -12,6 +12,9 @@ import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PessoasService } from 'src/app/services/Pessoas/pessoas.service';
 import { ToastService } from 'src/app/services/ToastController/toast.service';
+import { Observable } from 'rxjs';
+import { Departamento } from 'src/app/models/Departamento/departamento';
+import { OrdensService } from 'src/app/services/Ordens/ordens.service';
 
 @Component({
   selector: 'app-modal-pessoa',
@@ -20,6 +23,8 @@ import { ToastService } from 'src/app/services/ToastController/toast.service';
 })
 export class ModalPessoaComponent implements OnInit {
 
+  departamentos: Observable<Departamento[]>;
+
   @Input() id: string;
   pessoa: Pessoa =  new Pessoa();
 
@@ -27,9 +32,10 @@ export class ModalPessoaComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private pessoasService: PessoasService,
+    private ordensService: OrdensService,
     private toastService: ToastService
   ) {
-
+    this.departamentos = this.ordensService.getDepartamentos();
   }
 
   ngOnInit() {

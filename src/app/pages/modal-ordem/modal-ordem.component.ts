@@ -15,6 +15,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/services/ToastController/toast.service';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { PessoasService } from 'src/app/services/Pessoas/pessoas.service';
+import { Observable } from 'rxjs';
+import { Departamento } from 'src/app/models/Departamento/departamento';
 
 @Component({
   selector: 'app-modal-ordem',
@@ -22,6 +24,8 @@ import { PessoasService } from 'src/app/services/Pessoas/pessoas.service';
   styleUrls: ['./modal-ordem.component.css']
 })
 export class ModalOrdemComponent implements OnInit {
+
+  departamentos: Observable<Departamento[]>;
 
   @Input() id: string;
   @Input() id_Usuario: string;
@@ -36,7 +40,9 @@ export class ModalOrdemComponent implements OnInit {
     private pessoasService: PessoasService,
     private toastService: ToastService,
     private activeModal: NgbActiveModal
-  ) { }
+  ) {
+    this.departamentos = this.ordensService.getDepartamentos();
+  }
 
   ngOnInit() {
     if(this.id) {
@@ -50,6 +56,8 @@ export class ModalOrdemComponent implements OnInit {
       this.pessoasService.getPessoa(this.id_Usuario)
       .subscribe(usuario => {
         this.pessoa = usuario;
+        if(!this.ordem.dep_Origem)
+          this.ordem.dep_Origem = usuario.departamento;
       });
     }
   }

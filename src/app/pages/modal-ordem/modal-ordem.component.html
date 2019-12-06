@@ -10,11 +10,17 @@
   <form #formProduto=ngForm novalidate>
     <label for="dep_Origem">Departamento origem</label>
     <input type="text" [(ngModel)]="ordem.dep_Origem" name="dep_Origem" id="dep_Origem"
-      class="form-control" required>
+      class="form-control" required readonly>
 
     <label for="dep_Destino">Departamento destino</label>
-    <input type="text" [(ngModel)]="ordem.dep_Destino" name="dep_Destino" id="dep_Destino"
-      class="form-control" required>
+    <select [(ngModel)]="ordem.dep_Destino" name="dep_Destino" id="dep_Destino"
+    class="form-control" required>
+      <option *ngFor="let departamento of (departamentos | async)" [value]="departamento.nome">
+        {{departamento.nome}}
+      </option>
+    </select>
+    <!--<input type="text" [(ngModel)]="ordem.dep_Destino" name="dep_Destino" id="dep_Destino"
+      class="form-control" required>-->
 
     <label for="servico">Serviço</label>
     <input type="textarea" [(ngModel)]="ordem.servico" name="servico" id="servico"

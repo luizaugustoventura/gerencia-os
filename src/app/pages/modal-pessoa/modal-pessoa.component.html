@@ -21,8 +21,15 @@
     class="form-control" required>
 
     <label *ngIf="!pessoa.id" for="departamento">Departamento</label>
-    <input *ngIf="!pessoa.id" type="text" [(ngModel)]="pessoa.departamento" name="departamento"
-    id="departamento" class="form-control" required>
+    <select *ngIf="!pessoa.id" [(ngModel)]="pessoa.departamento"name="departamento" id="departamento"
+    class="form-control" required>
+      <option *ngFor="let departamento of (departamentos | async)" [value]="departamento.nome">
+        {{departamento.nome}}
+      </option>
+    </select>
+
+    <!--<input *ngIf="!pessoa.id" type="text" [(ngModel)]="pessoa.departamento" name="departamento"
+    id="departamento" class="form-control" required>-->
 
     <label for="telefone">Telefone</label>
     <input type="number" [(ngModel)]="pessoa.telefone" name="telefone" id="telefone"

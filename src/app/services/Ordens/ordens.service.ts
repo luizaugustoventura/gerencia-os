@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { OS } from 'src/app/models/OS/os';
 import { map, take } from 'rxjs/operators';
 import { AngularFirestoreCollection, DocumentReference, AngularFirestore } from '@angular/fire/firestore';
+import { Departamento } from 'src/app/models/Departamento/departamento';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,12 @@ export class OrdensService {
   private ordens: Observable<OS[]>;
   private ordensCollection: AngularFirestoreCollection<OS>;
 
+  private departamentos: Observable<Departamento[]>;
+  private departamentosCollection: AngularFirestoreCollection<Departamento>;
+
   constructor(private afs: AngularFirestore) {
     this.ordensCollection = this.afs.collection<OS>('ordens');
+    this.departamentosCollection = this.afs.collection<Departamento>('departamentos');
 
     this.ordens = this.ordensCollection.snapshotChanges()
     .pipe(
@@ -25,6 +30,21 @@ export class OrdensService {
         });
       })
     );
+
+    this.departamentos = this.departamentosCollection.snapshotChanges()
+    .pipe(
+      map(actions => {
+        return actions.map(a => {
+          const id = a.payload.doc.id;
+          const data = a.payload.doc.data();
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  getDepartamentos(): Observable<Departamento[]> {
+    return this.departamentos;
   }
 
   getOrdens(): Observable<OS[]> {
