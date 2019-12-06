@@ -12,6 +12,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable } from 'rxjs';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { map, take } from 'rxjs/operators';
+import { OS } from 'src/app/models/OS/os';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,12 @@ export class PessoasService {
   private pessoas: Observable<Pessoa[]>;
   private pessoasCollection: AngularFirestoreCollection<Pessoa>;
 
+  private ordens: Observable<OS[]>;
+  private ordensCollection: AngularFirestoreCollection<OS>;
+
   constructor(private afs: AngularFirestore) {
     this.pessoasCollection = this.afs.collection<Pessoa>('pessoas');
+    this.ordensCollection = this.afs.collection<OS>('ordens');
 
     this.pessoas = this.pessoasCollection.snapshotChanges()
     .pipe(
@@ -34,6 +39,22 @@ export class PessoasService {
         });
       })
     );
+
+    this.ordens = this.ordensCollection.snapshotChanges()
+    .pipe(
+      map(actions => {
+        return actions.map(a => {
+          const id = a.payload.doc.id;
+          const data = a.payload.doc.data();
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  // Função que verifica se uma pessoa possui ordens de serviço registradas
+  getOrdensByPessoa(pessoaId: string): Promise<any> {
+    return this.ordensCollection.ref.where('usuarioId', '==', pessoaId).get();
   }
 
   getPessoas(): Observable<Pessoa[]> {

@@ -36,15 +36,27 @@ export class ModalExcluirComponent implements OnInit {
   excluir(seg: string, id: string) {
     switch(seg) {
       case 'u':
-        this.pessoasService.delete(id)
-        .then(() => {
-          console.log('Usuário excluído');
-          this.toastService.show(true, 'Usuário excluído com sucesso');
+        this.pessoasService.getOrdensByPessoa(id)
+        .then(querySnapshot => {
+          if(querySnapshot.size > 0) {
+            this.toastService.show(false, 'Usuário possui ordens registradas');
+          }
+          else {
+            this.pessoasService.delete(id)
+            .then(() => {
+              console.log('Usuário excluído');
+              this.toastService.show(true, 'Usuário excluído com sucesso');
+            })
+            .catch(error => {
+              console.log(error);
+              this.toastService.show(false, 'Erro ao excluir usuário');
+            });
+          }
         })
-        .catch(error => {
-          console.log(error);
-          this.toastService.show(false, 'Erro ao excluir usuário');
+        .catch(err => {
+          console.log(err);
         });
+
         break;
 
       case 'o':
