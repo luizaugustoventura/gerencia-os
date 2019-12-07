@@ -23,6 +23,7 @@ import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component'
 import { ModalRespostaComponent } from '../modal-resposta/modal-resposta.component';
 import { ModalMensagemComponent } from '../modal-mensagem/modal-mensagem.component';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -45,7 +46,6 @@ export class HomeComponent implements OnInit {
     this.pessoas = this.pessoasService.getPessoas();
     this.ordens = this.ordensService.getOrdens();
     this.login = this.authService.getSessao();
-
   }
 
   ngOnInit() {
@@ -94,6 +94,31 @@ export class HomeComponent implements OnInit {
     const modal = this.modalService.open(ModalExcluirComponent);
     modal.componentInstance.segmento = seg;
     modal.componentInstance.id = id;
+  }
+
+  searchPessoas(buscar: string) {
+    this.pessoas = this.pessoasService.searchPessoa(buscar);
+  }
+
+  search(text: string) {
+    if (window.find && window.getSelection) {
+      document.designMode = "on";
+      var sel = window.getSelection();
+      sel.collapse(document.body, 0);
+
+      while (window.find(text)) {
+          document.execCommand("HiliteColor", false, "yellow");
+          sel.collapseToEnd();
+      }
+      document.designMode = "off";
+    }
+    else if (document.body.createTextRange) {
+      var textRange = document.body.createTextRange();
+      while (textRange.findText(text)) {
+          textRange.execCommand("BackColor", false, "yellow");
+          textRange.collapse(false);
+      }
+    }
   }
 
   logout() {

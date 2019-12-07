@@ -72,6 +72,27 @@ export class PessoasService {
     );
   }
 
+  searchPessoa(busca: string): Observable<Pessoa[]> {
+    return this.pessoasCollection.snapshotChanges()
+    .pipe(
+      map(actions => {
+        return actions.filter(item => {
+          ((item.payload.doc.data().nome.toLocaleLowerCase().includes(busca.toLocaleLowerCase()))
+          ||
+          (item.payload.doc.data().email.toLocaleLowerCase().includes(busca.toLocaleLowerCase()))
+          ||
+          (item.payload.doc.data().departamento.toLocaleLowerCase().includes(busca.toLocaleLowerCase())))
+        })
+        .map(a => {
+          console.log(a.payload.doc.data());
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
   create(pessoa: Pessoa): Promise<DocumentReference> {
     return this.pessoasCollection.add(pessoa);
   }

@@ -8,9 +8,9 @@
   <div class="modal-body">
     <form #formProduto=ngForm novalidate>
 
-      <label for="nome">Para</label>
-      <input type="textarea" [(ngModel)]="usuario.nome" name="nome" id="nome"
-        class="form-control" required>
+      <label for="telefone">Para: {{usuario.nome}}</label>
+      <input type="textarea" [(ngModel)]="usuario.telefone" name="telefone" id="telefone"
+        class="form-control" required readonly>
 
       <label for="mensagem">Mensagem</label>
       <input type="textarea" [(ngModel)]="mensagem" name="mensagem" id="mensagem"
