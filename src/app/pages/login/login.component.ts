@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
     this.authService.logIn(usuario.email, usuario.senha)
     .then(querySnapshot => {
       if(querySnapshot.size > 0) {
-        console.log('Sucesso meu guerreiro');
         querySnapshot.forEach(doc => {
           let login: Login = {
             id: doc.id,
@@ -56,7 +55,6 @@ export class LoginComponent implements OnInit {
         });
       }
       else {
-        console.log('Tá errado aí meu guerrero');
         this.toastService.show(false, 'Dados de login inválidos');
       }
     })

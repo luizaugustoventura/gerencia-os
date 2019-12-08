@@ -42,9 +42,6 @@ export class AuthenticationService {
   }
 
   logIn(email: string, senha: string): Promise<any> {
-
-    console.log(email, senha);
-
     return this.pessoasCollection.ref.where('email', '==', email).
     where('senha', '==', senha).limit(1)
     .get();

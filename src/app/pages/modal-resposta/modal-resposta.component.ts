@@ -34,7 +34,6 @@ export class ModalRespostaComponent implements OnInit {
 
     this.ordensService.update(os)
     .then(() => {
-      console.log('Ordem de serviço atualizada');
       this.toastService.show(true, 'Atendimento realizado com sucesso');
       this.activeModal.close('Close click');
     })

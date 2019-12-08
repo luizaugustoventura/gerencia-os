@@ -73,7 +73,6 @@ export class ModalOrdemComponent implements OnInit {
 
     this.ordensService.create(ordemServico)
     .then(() => {
-      console.log('Ordem de serviço registrada');
       this.toastService.show(true, 'Ordem de serviço registrada com sucesso');
       this.activeModal.close('Close click');
     })
@@ -97,7 +96,6 @@ export class ModalOrdemComponent implements OnInit {
 
     this.ordensService.update(ordemServico)
     .then(() => {
-      console.log('Ordem de serviço atualizada');
       this.toastService.show(true, 'Ordem de serviço alterada com sucesso');
       this.activeModal.close('Close click');
     })

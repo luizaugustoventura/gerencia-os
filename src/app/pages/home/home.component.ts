@@ -22,13 +22,14 @@ import { ModalOrdemComponent } from '../modal-ordem/modal-ordem.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
 import { ModalRespostaComponent } from '../modal-resposta/modal-resposta.component';
 import { ModalMensagemComponent } from '../modal-mensagem/modal-mensagem.component';
-
+import { window } from '../../window';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
   pessoas: Observable<Pessoa[]>;
@@ -63,7 +64,6 @@ export class HomeComponent implements OnInit {
     }
     else {
       console.log('Sessão iniciada');
-      console.log(this.authService.getSessao());
     }
   }
 

@@ -44,7 +44,6 @@ export class ModalExcluirComponent implements OnInit {
           else {
             this.pessoasService.delete(id)
             .then(() => {
-              console.log('Usuário excluído');
               this.toastService.show(true, 'Usuário excluído com sucesso');
             })
             .catch(error => {
@@ -64,7 +63,6 @@ export class ModalExcluirComponent implements OnInit {
       case 'o':
         this.ordensService.delete(id)
         .then(() => {
-          console.log('Ordem de serviço excluída');
           this.toastService.show(true, 'Ordem de serviço excluída com sucesso');
           this.activeModal.close('Close click');
         })

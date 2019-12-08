@@ -60,7 +60,6 @@ export class ModalPessoaComponent implements OnInit {
 
     this.pessoasService.create(usuario)
     .then(() => {
-      console.log('Usuário registrado');
       this.toastService.show(true, 'Usuário registrado com sucesso');
       this.activeModal.close('Close click');
     })
@@ -84,7 +83,6 @@ export class ModalPessoaComponent implements OnInit {
 
     this.pessoasService.update(usuario)
     .then(() => {
-      console.log('Usuário alterado');
       this.toastService.show(true, 'Usuário alterado com sucesso');
       this.activeModal.close('Close click');
     })

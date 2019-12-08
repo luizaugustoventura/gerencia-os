@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OS } from 'src/app/models/OS/os';
 import { map, take } from 'rxjs/operators';
-import { AngularFirestoreCollection, DocumentReference, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, DocumentReference, AngularFirestore, sortedChanges } from '@angular/fire/firestore';
 import { Departamento } from 'src/app/models/Departamento/departamento';
 
 @Injectable({
@@ -17,8 +17,8 @@ export class OrdensService {
   private departamentosCollection: AngularFirestoreCollection<Departamento>;
 
   constructor(private afs: AngularFirestore) {
-    this.ordensCollection = this.afs.collection<OS>('ordens');
-    this.departamentosCollection = this.afs.collection<Departamento>('departamentos');
+    this.ordensCollection = this.afs.collection<OS>('ordens', ref => ref.orderBy('data', 'desc'));
+    this.departamentosCollection = this.afs.collection<Departamento>('departamentos', ref => ref.orderBy('nome'));
 
     this.ordens = this.ordensCollection.snapshotChanges()
     .pipe(
@@ -27,7 +27,7 @@ export class OrdensService {
           const id = a.payload.doc.id;
           const data = a.payload.doc.data();
           return { id, ...data };
-        });
+        })
       })
     );
 

@@ -26,7 +26,7 @@ export class PessoasService {
   private ordensCollection: AngularFirestoreCollection<OS>;
 
   constructor(private afs: AngularFirestore) {
-    this.pessoasCollection = this.afs.collection<Pessoa>('pessoas');
+    this.pessoasCollection = this.afs.collection<Pessoa>('pessoas', ref => ref.orderBy('nome'));
     this.ordensCollection = this.afs.collection<OS>('ordens');
 
     this.pessoas = this.pessoasCollection.snapshotChanges()
