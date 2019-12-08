@@ -58,15 +58,25 @@ export class ModalPessoaComponent implements OnInit {
       admin: false
     };
 
-    this.pessoasService.create(usuario)
-    .then(() => {
-      this.toastService.show(true, 'Usuário registrado com sucesso');
-      this.activeModal.close('Close click');
-    })
-    .catch((error) => {
-      console.log(error);
-      this.toastService.show(false, 'Erro ao registrar usuário');
-      this.activeModal.close('Close click');
+    this.pessoasService.getPessoaByEmail(usuario.email)
+    .then(querySnapshot => {
+      if(querySnapshot.size > 0) {
+        this.toastService.show(false, 'E-mail já está cadastrado');
+        this.activeModal.close('Close click');
+      }
+      else {
+        this.pessoasService.create(usuario)
+        .then(() => {
+          this.toastService.show(true, 'Usuário registrado com sucesso');
+          this.activeModal.close('Close click');
+        })
+        .catch((error) => {
+          console.log(error);
+          this.toastService.show(false, 'Erro ao registrar usuário');
+          this.activeModal.close('Close click');
+        });
+      }
+
     });
   }
 

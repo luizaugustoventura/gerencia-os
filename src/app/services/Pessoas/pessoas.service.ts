@@ -8,7 +8,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference, QuerySnapshot, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Pessoa } from 'src/app/models/Pessoa/pessoa';
 import { map, take } from 'rxjs/operators';
@@ -70,6 +70,10 @@ export class PessoasService {
         return pessoa;
       })
     );
+  }
+
+  getPessoaByEmail(email: string): Promise<QuerySnapshot<DocumentData>> {
+    return this.pessoasCollection.ref.where('email', '==', email).get();
   }
 
   searchPessoa(busca: string): Observable<Pessoa[]> {
