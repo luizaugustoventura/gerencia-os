@@ -27,7 +27,7 @@ export class ModalExcluirComponent implements OnInit {
     private pessoasService: PessoasService,
     private ordensService: OrdensService,
     private toastService: ToastService,
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {

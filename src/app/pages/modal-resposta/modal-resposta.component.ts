@@ -18,7 +18,7 @@ export class ModalRespostaComponent implements OnInit {
   constructor(
     private ordensService: OrdensService,
     private toastService: ToastService,
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {

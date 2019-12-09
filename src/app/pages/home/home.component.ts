@@ -22,7 +22,15 @@ import { ModalOrdemComponent } from '../modal-ordem/modal-ordem.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
 import { ModalRespostaComponent } from '../modal-resposta/modal-resposta.component';
 import { ModalMensagemComponent } from '../modal-mensagem/modal-mensagem.component';
-import { window } from '../../window';
+
+declare global {
+  interface Window {
+    find?: any;
+  }
+  interface HTMLElement {
+    createTextRange?: any;
+  }
+}
 
 @Component({
   selector: 'app-home',

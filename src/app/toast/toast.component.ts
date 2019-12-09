@@ -20,7 +20,7 @@ export class ToastComponent implements OnInit {
   autohide = true;
 
   constructor(
-    private toastService: ToastService
+    public toastService: ToastService
   ) { }
 
   ngOnInit() {

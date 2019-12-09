@@ -30,7 +30,7 @@ export class ModalPessoaComponent implements OnInit {
 
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private pessoasService: PessoasService,
     private ordensService: OrdensService,
     private toastService: ToastService
@@ -54,7 +54,7 @@ export class ModalPessoaComponent implements OnInit {
       email: pessoa.email,
       senha: pessoa.senha,
       departamento: pessoa.departamento,
-      telefone: pessoa.telefone,
+      telefone: this.validaNumero(pessoa.telefone),
       admin: false
     };
 
@@ -87,7 +87,7 @@ export class ModalPessoaComponent implements OnInit {
       email: pessoa.email,
       senha: pessoa.senha,
       departamento: pessoa.departamento,
-      telefone: pessoa.telefone,
+      telefone: this.validaNumero(pessoa.telefone),
       admin: false
     };
 
@@ -102,4 +102,20 @@ export class ModalPessoaComponent implements OnInit {
       this.activeModal.close('Close click');
     });
   }
+
+  validaNumero(n: string): string {
+    const numero = n.replace(/[- ]/g, '');
+    if (numero.startsWith('5535')) {
+      return numero;
+    }
+    else {
+      if (numero.startsWith('55') || numero.startsWith('35')) {
+        return ('5535').concat(numero.slice(2,13));
+      }
+      else {
+        return ('5535').concat(numero);
+      }
+    }
+  }
+
 }

@@ -39,7 +39,7 @@ export class ModalOrdemComponent implements OnInit {
     private ordensService: OrdensService,
     private pessoasService: PessoasService,
     private toastService: ToastService,
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) {
     this.departamentos = this.ordensService.getDepartamentos();
   }

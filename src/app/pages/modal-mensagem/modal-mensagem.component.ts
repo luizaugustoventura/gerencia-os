@@ -15,7 +15,7 @@ export class ModalMensagemComponent implements OnInit {
   usuario: Pessoa;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private pessoasService: PessoasService
   ) { }
 
