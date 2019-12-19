@@ -58,14 +58,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*let p: OS = {
-      id_Cliente: '1',
-      dep_Origem: 'Saúde',
-      dep_Destino: 'Informática',
-      servico: 'PC não liga',
-      data: Date.now()
-    };*/
-
     if(!this.authService.getSessao()) {
       console.log('Por favor, efetue login antes!');
       this.router.navigate(['']);

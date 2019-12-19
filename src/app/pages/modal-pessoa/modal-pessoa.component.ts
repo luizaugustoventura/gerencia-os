@@ -43,7 +43,6 @@ export class ModalPessoaComponent implements OnInit {
       this.pessoasService.getPessoa(this.id)
       .subscribe(p => {
         this.pessoa = p;
-        console.log(p);
       });
     }
   }
@@ -54,8 +53,8 @@ export class ModalPessoaComponent implements OnInit {
       email: pessoa.email,
       senha: pessoa.senha,
       departamento: pessoa.departamento,
-      telefone: this.validaNumero(pessoa.telefone),
-      admin: false
+      telefone: this.validaNumero(pessoa.telefone.toString()),
+      funcao: 2
     };
 
     this.pessoasService.getPessoaByEmail(usuario.email)
@@ -87,8 +86,8 @@ export class ModalPessoaComponent implements OnInit {
       email: pessoa.email,
       senha: pessoa.senha,
       departamento: pessoa.departamento,
-      telefone: this.validaNumero(pessoa.telefone),
-      admin: false
+      telefone: this.validaNumero(pessoa.telefone.toString()),
+      funcao: 2
     };
 
     this.pessoasService.update(usuario)

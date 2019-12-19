@@ -5,5 +5,5 @@ export class Pessoa {
   departamento: string;
   telefone: string;
   senha: string;
-  admin: boolean;
+  funcao: number;
 }

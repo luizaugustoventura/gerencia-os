@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             id: doc.id,
             nome: doc.data().nome,
             email: doc.data().email,
-            admin: doc.data().admin
+            funcao: doc.data().funcao
           };
 
           this.authService.setSessao(login);
