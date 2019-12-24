@@ -41,6 +41,9 @@ yarn-error.log
 testem.log
 /typings
 
+# Connection string
+connection.ts
+
 # System Files
 .DS_Store
 Thumbs.db

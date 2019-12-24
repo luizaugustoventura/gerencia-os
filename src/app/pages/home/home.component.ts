@@ -122,7 +122,6 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    console.log("Fazendo logout");
     this.router.navigate(['']);
   }
 }
