@@ -91,7 +91,9 @@ export class ModalOrdemComponent implements OnInit {
       dep_Destino: os.dep_Destino,
       servico: os.servico,
       data: firebase.firestore.Timestamp.fromDate(new Date()),
-      resposta: os.resposta
+      resposta: os.resposta,
+      funcionarioId: os.funcionarioId,
+      atendidaEm: os.atendidaEm
     };
 
     this.ordensService.update(ordemServico)

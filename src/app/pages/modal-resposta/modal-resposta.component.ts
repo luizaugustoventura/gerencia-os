@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as firebase from 'firebase';
 import { OrdensService } from 'src/app/services/Ordens/ordens.service';
+import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
 import { OS } from 'src/app/models/OS/os';
 import { ToastService } from 'src/app/services/ToastController/toast.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +19,7 @@ export class ModalRespostaComponent implements OnInit {
 
   constructor(
     private ordensService: OrdensService,
+    private authService: AuthenticationService,
     private toastService: ToastService,
     public activeModal: NgbActiveModal
   ) { }
@@ -31,6 +34,8 @@ export class ModalRespostaComponent implements OnInit {
   alterar() {
     let os: OS = this.ordem;
     os.resposta = this.resposta;
+    os.funcionarioId = this.authService.getSessao().id;
+    os.atendidaEm = firebase.firestore.Timestamp.fromDate(new Date());
 
     this.ordensService.update(os)
     .then(() => {

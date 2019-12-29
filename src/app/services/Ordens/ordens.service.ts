@@ -67,13 +67,15 @@ export class OrdensService {
   }
 
   update(ordem: OS): Promise<void> {
-    if(ordem.resposta) {
+    if(ordem.resposta || ordem.funcionarioId || ordem.atendidaEm) {
       return this.ordensCollection.doc(ordem.id)
       .update({
         dep_Destino: ordem.dep_Destino,
         servico: ordem.servico,
+        data: ordem.data,
+        funcionarioId: ordem.funcionarioId,
+        atendidaEm: ordem.atendidaEm,
         resposta: ordem.resposta,
-        data: ordem.data
       });
     }
     return this.ordensCollection.doc(ordem.id)

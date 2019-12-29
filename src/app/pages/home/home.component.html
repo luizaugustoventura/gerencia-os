@@ -89,6 +89,12 @@
               <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
               <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
               <p><b>Serviço: </b>{{ordem.servico}}</p>
+              <span *ngIf="ordem.funcionarioId">
+                <span *ngFor="let pessoa of (pessoas | async)">
+                  <p *ngIf="pessoa.id === ordem.funcionarioId"><b>Atendida por: </b>{{pessoa.nome}}</p>
+                </span>
+                <p *ngIf="ordem.atendidaEm"><b>Atendida em: </b>{{ordem.atendidaEm.seconds * 1000 | date:"dd/MM/yyyy"}}</p>
+              </span>
               <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
             </div>
           </div>
@@ -155,6 +161,12 @@
             <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
             <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
             <p><b>Serviço: </b>{{ordem.servico}}</p>
+            <span *ngIf="ordem.funcionarioId">
+              <span *ngFor="let pessoa of (pessoas | async)">
+                <p *ngIf="pessoa.id === ordem.funcionarioId"><b>Atendida por: </b>{{pessoa.nome}}</p>
+              </span>
+              <p *ngIf="ordem.atendidaEm"><b>Atentida em: </b>{{ordem.atendidaEm.seconds * 1000 | date:'dd/MM/yyyy'}}</p>
+            </span>
             <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
           </div>
         </div>
@@ -222,6 +234,12 @@
                   <p><b>Departamento origem: </b>{{ordem.dep_Origem}}</p>
                   <p><b>Departamento destino: </b>{{ordem.dep_Destino}}</p>
                   <p><b>Serviço: </b>{{ordem.servico}}</p>
+                  <span *ngIf="ordem.funcionarioId">
+                    <span *ngFor="let pessoa of (pessoas | async)">
+                      <p *ngIf="pessoa.id === ordem.funcionarioId"><b>Atendida por: </b>{{pessoa.nome}}</p>
+                    </span>
+                    <p *ngIf="ordem.atendidaEm"><b>Atendida em: </b>{{ordem.atendidaEm.seconds * 1000 | date:'dd/MM/yyyy'}}</p>
+                  </span>
                   <p *ngIf="ordem.resposta"><b>Resposta: </b>{{ordem.resposta}}</p>
                 </div>
               </div>
